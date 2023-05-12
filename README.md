@@ -72,4 +72,4 @@ MIT License
 Copyright (c) 2023 Ali Momin
 
 ## Walkthrough Video
-Please find the walkthrough video demonstrating the functionality of the app here: [Add walkthrough video link here]
+Please find the walkthrough video demonstrating the functionality of the app here: [https://drive.google.com/file/d/1TsHdBmwKi6jocZueEtwXcLSj7HlL6mro/view]
