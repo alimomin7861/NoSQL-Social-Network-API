@@ -2,7 +2,8 @@ const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
 
 const thoughtController = {
-    getAllThought(req, res) {
+    // Get all thoughts at GET http://localhost:3001/api/thoughts
+    getAllThoughts(req, res) {
         Thought.find({})
           .populate({
             path: "reactions", //Thought also populates Thoughts
@@ -16,8 +17,8 @@ const thoughtController = {
           });
       },
     
-      // get one Thought by id  Get http://localhost:3001/api/Thoughts/<Thought-id-here>
-      getThoughtById({ params }, res) {
+      // Get one Thought by ID  GET http://localhost:3001/api/Thoughts/<Thought-id-here>
+      getThoughtByID({ params }, res) {
         Thought.findOne({ _id: params.id })
           .then((dbThoughtData) => {
             if (!dbThoughtData) {
@@ -32,7 +33,7 @@ const thoughtController = {
           });
       },
     
-      // createThought   Post http://localhost:3001/api/Thoughts
+      // createThought POST http://localhost:3001/api/Thoughts
       createThought({ body }, res) {
         Thought.create(body)
           .then((_id) => {  // it associates which id we are creating
@@ -52,7 +53,7 @@ const thoughtController = {
           .catch((err) => res.json(err));
       },
     
-      // update Thought by id  Put http://localhost:3001/api/Thoughts/<Thought-id-here>
+      // update Thought by id  PUT http://localhost:3001/api/Thoughts/<Thought-id-here>
       updateThought({ params, body }, res) {
         Thought.findOneAndUpdate({ _id: params.id }, body, {
           new: true,
@@ -67,7 +68,7 @@ const thoughtController = {
           .catch((err) => res.status(400).json(err));
       },
     
-      // delete Thought Delete  localhost:3001/api/Thoughts/<Thought-id-here>
+      // delete Thought DELETE localhost:3001/api/Thoughts/<Thought-id-here>
       deleteThought({ params }, res) {
         Thought.findOneAndDelete({ _id: params.id })
           .then((dbThoughtData) => {
@@ -81,7 +82,7 @@ const thoughtController = {
       },
       
       // Add Reaction to a Thought
-      addReaction({ params, body }, res) {
+      createReaction({ params, body }, res) {
         Thought.findOneAndUpdate(
           { _id: params.thoughtId },
           { $addToSet: { reactions: body } },
